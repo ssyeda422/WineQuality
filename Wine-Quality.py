@@ -3,8 +3,8 @@ import numpy as np
 import seaborn as sns
 
 
-wineRed = pd.read_csv(r'C:\Users\saniy\OneDrive\Documents\WPI 2020-2021\D TERM\MACHINE LEARNING\winequality-red.csv')
-wineWhite = pd.read_csv(r'C:\Users\saniy\OneDrive\Documents\WPI 2020-2021\D TERM\MACHINE LEARNING\winequality-white.csv')
+wineRed = pd.read_csv(r'winequality-red.csv')
+wineWhite = pd.read_csv(r'winequality-white.csv')
 
 #Printing correlation matrix for red wine
 print(wineRed.head())

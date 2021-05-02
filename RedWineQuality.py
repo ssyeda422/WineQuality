@@ -7,14 +7,13 @@ from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn import (metrics, discriminant_analysis, linear_model)
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 
 
 wineRed = pd.read_csv(r'winequality-red.csv')
-wineWhite = pd.read_csv(r'winequality-white.csv')
 np.random.seed(7)
 wineRed.dropna()
-wineWhite.dropna()
 
 #We can comment and uncomment different sections based on what we want to output if that works!
 #At some point maybe we split up red and white wine analysis into two different files but with all the same code, it might be easier
@@ -94,7 +93,6 @@ print(logit.summary())
 ypred = logit.predict(Xtest)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("Logistic Regression MSE: ", mse) """
-#From here we can see that volatile acidity, citric acid, chlorides, free sulfur dioxide, total sulfur dioxide, sulphates, and alcohol are all significant
 
 #QDA - Classification
 """ qda = discriminant_analysis.QuadraticDiscriminantAnalysis()
@@ -113,8 +111,13 @@ print(ols.summary())
 ypred = ols.predict(Xb)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("OLS MSE: ", mse)  """
-#From this model, it looks like volatile acidity, citric acid, chlorides, free sulfur dioxide, total sulfur dioxide, sulphates, and alcohol are all still significant
 #With classification we also seem to yield much smaller MSEs and greater accuracy scores, so we can use more classification techniques
 
 #Random forest classification
+""" rfc = RandomForestClassifier(n_estimators=100)
+rfc.fit(Xtrain,ytrain)
+ypred = rfc.predict(Xtest)
+mse = metrics.mean_squared_error(ytest, ypred)
+print("Random Forest Test MSE: ", mse)
+print("Accuracy (100 Trees):", metrics.accuracy_score(ytest, ypred)) """
 

@@ -20,9 +20,7 @@ wineRed.dropna()
 
 #Printing correlation matrix for red wine
 """ print(wineRed.head())
-sns.pairplot(wineRed) 
-corrMatrix = wineRed.corr()
-sns.heatmap(corrMatrix, annot=True) """
+sns.pairplot(wineRed) """
 
 #Printing correlation matrix for white wine
 """ corrMatrix = wineWhite.corr()

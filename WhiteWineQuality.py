@@ -41,7 +41,6 @@ print(ols.summary())
 ypred = ols.predict(Xtest)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("OLS MSE: ", mse) """
-#From this model, it looks like volatile acidity, chlorides, free sulfur dioxide, total sulfur dioxide, pH, sulphates, and alcohol are significant
 #But the mean squared error is pretty high, so we can also try a different model besides regression 
 
 #We can try using the predictor alcohol to predict quality with polynomial regression
@@ -61,10 +60,10 @@ for i in range(1, 10):
     kf_scores.loc[i] = abs(cv_scores.mean())
 print("Min: ", kf_scores.idxmin())
 plt.plot(np.arange(1,10), kf_scores)  """
-#Optimal degree seems to be 3, min MSE
+#Optimal degree seems to be 7, min MSE
 
 #Plotting the curve
-""" poly_reg = PolynomialFeatures(degree=3)
+""" poly_reg = PolynomialFeatures(degree=7)
 X_poly = poly_reg.fit_transform(X)
 lin_reg = linear_model.LinearRegression(fit_intercept=False)
 lin_reg.fit(X_poly, y)
@@ -112,7 +111,6 @@ print(ols.summary())
 ypred = ols.predict(Xb)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("OLS MSE: ", mse)  """
-#From this model, it looks like volatile acidity, citric acid, chlorides, free sulfur dioxide, total sulfur dioxide, sulphates, and alcohol are all still significant
 #With classification we also seem to yield much smaller MSEs and greater accuracy scores, so we can use more classification techniques
 
 #Random forest classification
@@ -122,4 +120,6 @@ ypred = rfc.predict(Xtest)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("Random Forest Test MSE: ", mse)
 print("Accuracy (100 Trees):", metrics.accuracy_score(ytest, ypred)) """
+
+#Decision tree classifiers
 

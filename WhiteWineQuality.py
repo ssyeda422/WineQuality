@@ -77,12 +77,12 @@ print("Polynomial Regression: Alcohol vs. Quality MSE: ", metrics.mean_squared_e
 
 #We can convert wineWhite quality variables to classifiers, so 1 if >= 7 for good quality, and 0 if < 7
 #Uncomment this section to use the classification dataset, and comment out the previous train test split which doesn't transform the quality column
-wineWhiteB = wineWhite
+"""wineWhiteB = wineWhite
 wineWhiteB['quality'] = np.where(wineWhiteB['quality'] >= 7, 1, 0)
 
 X = wineWhiteB.drop('quality', axis=1)
 y = wineWhiteB['quality']
-Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7)
+Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7)"""
 
 #Logistic Regression summary - Classification, using statsmodels
 """ Xb = sm.add_constant(Xtrain)

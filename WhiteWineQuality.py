@@ -77,12 +77,12 @@ print("Polynomial Regression: Alcohol vs. Quality MSE: ", metrics.mean_squared_e
 
 #We can convert wineWhite quality variables to classifiers, so 1 if >= 7 for good quality, and 0 if < 7
 #Uncomment this section to use the classification dataset, and comment out the previous train test split which doesn't transform the quality column
-"""wineWhiteB = wineWhite
+wineWhiteB = wineWhite
 wineWhiteB['quality'] = np.where(wineWhiteB['quality'] >= 7, 1, 0)
 
 X = wineWhiteB.drop('quality', axis=1)
 y = wineWhiteB['quality']
-Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7)"""
+Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7)
 
 #Logistic Regression summary - Classification, using statsmodels
 """ Xb = sm.add_constant(Xtrain)
@@ -102,6 +102,39 @@ score = qda.score(Xtest, ytest)
 print("\nQDA Score: ", score)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("QDA MSE: ", mse)  """
+
+#LDA - Classification 
+"""lda = discriminant_analysis.LinearDiscriminantAnalysis()
+lda.fit(Xtrain, ytrain)
+ypred = lda.predict(Xtest)
+scores = cross_val_score(lda, Xtrain, ytrain)
+lda_score = scores.mean()
+print("\nLDA Score: ", lda_score) 
+lda_mse  = metrics.mean_squared_error(ytest, ypred)
+print("LDA MSE: ", lda_mse)"""
+
+#KNN - Classification 
+# I am unfamiliar with python so I followed this: https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/
+# Wanted to reference it just in case 
+# compate MSE with different K values 
+"""error = []
+for i  in range(1, 40): 
+    knn_i = KNeighborsClassifier(n_neighbors=i)
+    knn_i.fit(Xtrain, ytrain)
+    pred_i = knn_i.predict(Xtest)
+    error.append(metrics.mean_squared_error(ytest, pred_i))
+knn_mse = min(error)
+k_value = error.index(knn_mse) + 1 #adding one since it is an index
+print("KNN K Value: ", k_value)
+print("KNN MSE: ", knn_mse)
+# below is copied from the link above, it shows a really nice plot for the 
+# different K values 
+plt.figure(figsize=(12, 6))
+plt.plot(range(1, 40), error, color='red', linestyle='dashed', marker='o',
+         markerfacecolor='blue', markersize=10)
+plt.title('Error Rate K Value')
+plt.xlabel('K Value')
+plt.ylabel('Mean Error')"""
 
 #OLS - Classification
 """ Xa = sm.add_constant(Xtrain)

@@ -7,8 +7,10 @@ from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn import (metrics, discriminant_analysis, linear_model)
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
+import graphviz
 
 #I didn't do anything new here I just copied over the red wine code and replaced 'wineRed' with 'wineWhite'
 #So we can run the actual code at some point later
@@ -155,4 +157,10 @@ print("Random Forest Test MSE: ", mse)
 print("Accuracy (100 Trees):", metrics.accuracy_score(ytest, ypred)) """
 
 #Decision tree classifiers
-
+dtc = tree.DecisionTreeClassifier(random_state=7)
+dtc.fit(Xtrain, ytrain)
+ypred = dtc.predict(Xtest)
+mse = metrics.mean_squared_error(ytest, ypred)
+print("Decision Tree Classifier Test MSE: ", mse)
+tree.plot_tree(dtc)
+dot_data = tree.export_graphviz(dtc, out_file='whiteWineTree.dot')

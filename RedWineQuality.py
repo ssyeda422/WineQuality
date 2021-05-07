@@ -7,8 +7,10 @@ from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn import (metrics, discriminant_analysis, linear_model)
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
+import graphviz
 
 #UNCOMMENT CORRECT FILE PATH - there is something wrong in
 wineRed = pd.read_csv(r'winequality-red.csv')
@@ -134,7 +136,6 @@ plt.title('Error Rate K Value')
 plt.xlabel('K Value')
 plt.ylabel('Mean Error')"""
 
-
 #OLS - Classification
 """ Xa = sm.add_constant(Xtrain)
 Xb = sm.add_constant(Xtest)
@@ -146,11 +147,24 @@ print("OLS MSE: ", mse)  """
 #With classification we also seem to yield much smaller MSEs and greater accuracy scores, so we can use more classification techniques
 
 #Random forest classification
-""" rfc = RandomForestClassifier(n_estimators=100)
+rfc = RandomForestClassifier(n_estimators=100)
 rfc.fit(Xtrain,ytrain)
 ypred = rfc.predict(Xtest)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("Random Forest Test MSE: ", mse)
-print("Accuracy (100 Trees):", metrics.accuracy_score(ytest, ypred)) """
+print("Accuracy (100 Trees):", metrics.accuracy_score(ytest, ypred))
+
+importance = rfc.feature_importances_
+for i,v in enumerate(importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
 
 #Decision tree classifiers
+""" dtc = tree.DecisionTreeClassifier(random_state=7)
+dtc.fit(Xtrain, ytrain)
+ypred = dtc.predict(Xtest)
+mse = metrics.mean_squared_error(ytest, ypred)
+print("Decision Tree Classifier Test MSE: ", mse)
+tree.plot_tree(dtc)
+dot_data = tree.export_graphviz(dtc, out_file='redWineTree.dot') """

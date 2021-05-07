@@ -154,13 +154,38 @@ rfc.fit(Xtrain,ytrain)
 ypred = rfc.predict(Xtest)
 mse = metrics.mean_squared_error(ytest, ypred)
 print("Random Forest Test MSE: ", mse)
-print("Accuracy (100 Trees):", metrics.accuracy_score(ytest, ypred)) """
+print("Accuracy (100 Trees):", metrics.accuracy_score(ytest, ypred))
+
+importance = rfc.feature_importances_
+for i,v in enumerate(importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+plt.bar([x for x in range(len(importance))], importance, tick_label=X.columns.tolist())
+plt.xticks(rotation=45, ha='right')
+plt.title('White Wine Random Forest Feature Importances')
+plt.show()  """
 
 #Decision tree classifiers
-dtc = tree.DecisionTreeClassifier(random_state=7)
+""" mse_scores = pd.Series()
+for i in range(1,22):
+    dtc = tree.DecisionTreeClassifier(random_state=6, max_depth=i)
+    dtc.fit(Xtrain, ytrain)
+    ypred = dtc.predict(Xtest)
+    mse = metrics.mean_squared_error(ytest, ypred)
+    mse_scores = mse_scores.append(pd.Series([mse]))
+    print("Test MSE for depth " + str(i) + ": " + str(mse))
+plt.xticks(ticks=np.arange(1,22,1))
+plt.xlabel('Tree Depth')
+plt.ylabel('Test MSE')
+plt.plot(np.arange(1, 22), mse_scores) """
+#Optimal depth looks to be 13
+
+""" dtc = tree.DecisionTreeClassifier(max_depth=13, random_state=6)
 dtc.fit(Xtrain, ytrain)
 ypred = dtc.predict(Xtest)
 mse = metrics.mean_squared_error(ytest, ypred)
-print("Decision Tree Classifier Test MSE: ", mse)
+print("Decision Tree Classifier Test MSE (Depth 13): ", mse)
+#print(dtc.get_depth())
 tree.plot_tree(dtc)
 dot_data = tree.export_graphviz(dtc, out_file='whiteWineTree.dot')
+plt.show()
+ """

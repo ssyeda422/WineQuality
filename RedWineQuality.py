@@ -185,4 +185,12 @@ mse = metrics.mean_squared_error(ytest, ypred)
 print("Decision Tree Classifier Test MSE (Depth 2): ", mse)
 print(dtc.get_depth())
 tree.plot_tree(dtc)
-dot_data = tree.export_graphviz(dtc, out_file='redWineTree.dot') """
+dot_data = tree.export_graphviz(dtc, out_file='redWineTree.dot')
+
+importance = dtc.feature_importances_
+for i,v in enumerate(importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+plt.bar([x for x in range(len(importance))], importance, tick_label=X.columns.tolist())
+plt.xticks(rotation=45, ha='right')
+plt.title('Red Wine Decision Tree Feature Importances')
+plt.show() """

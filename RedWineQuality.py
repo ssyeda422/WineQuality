@@ -12,12 +12,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 import graphviz
 
-#UNCOMMENT CORRECT FILE PATH - there is something wrong in
 wineRed = pd.read_csv(r'winequality-red.csv')
 np.random.seed(7)
 wineRed.dropna()
 
-#We can comment and uncomment different sections based on what we want to output!
+#The different sections are commented out so they don't interfere with eachother (specifically regression and classification X and y)
+#Feel free to uncomment these sections!
 
 #Visualizing the distribution of variables with histograms
 """ def draw_histograms(df, variables, n_rows, n_cols):
@@ -86,12 +86,12 @@ print("Polynomial Regression: Alcohol vs. Quality MSE: ", metrics.mean_squared_e
 
 #We can convert wineRed quality variables to classifiers, so 1 if >= 7 for good quality, and 0 if < 7
 #Uncomment this section to use the classification dataset, and comment out the previous train test split which doesn't transform the quality column
-wineRedB = wineRed
+""" wineRedB = wineRed
 wineRedB['quality'] = np.where(wineRedB['quality'] >= 7, 1, 0)
 
 X = wineRedB.drop('quality', axis=1)
 y = wineRedB['quality']
-Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7)
+Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7) """
 
 #Logistic Regression summary - Classification
 """ logit = linear_model.LogisticRegression()

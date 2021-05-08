@@ -17,16 +17,24 @@ wineRed = pd.read_csv(r'winequality-red.csv')
 np.random.seed(7)
 wineRed.dropna()
 
-#We can comment and uncomment different sections based on what we want to output if that works!
-#At some point maybe we split up red and white wine analysis into two different files but with all the same code, it might be easier
+#We can comment and uncomment different sections based on what we want to output!
+
+#Visualizing the distribution of variables with histograms
+""" def draw_histograms(df, variables, n_rows, n_cols):
+    fig=plt.figure()
+    for i, var_name in enumerate(variables):
+        ax=fig.add_subplot(n_rows,n_cols,i+1)
+        df[var_name].hist(ax=ax)
+        ax.set_title(var_name)
+    fig.tight_layout()
+    fig.suptitle('Red Wine Feature Distributions')
+    plt.show()
+
+draw_histograms(wineRed, wineRed.columns, 3, 4) """
 
 #Printing correlation matrix for red wine
 """print(wineRed.head())
 sns.pairplot(wineRed)"""
-
-#Printing correlation matrix for white wine
-""" corrMatrix = wineWhite.corr()
-sns.heatmap(corrMatrix, annot=True) """
 
 #Train test split with all predictors for quality
 """ X = wineRed.drop('quality', axis=1)

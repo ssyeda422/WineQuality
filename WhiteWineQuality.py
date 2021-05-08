@@ -19,12 +19,20 @@ wineWhite = pd.read_csv(r'winequality-white.csv')
 np.random.seed(7)
 wineWhite.dropna()
 
-#We can comment and uncomment different sections based on what we want to output if that works!
-#At some point maybe we split up red and white wine analysis into two different files but with all the same code, it might be easier
+#We can comment and uncomment different sections based on what we want to output!
 
-#Printing correlation matrix for red wine
-""" print(wineWhite.head())
-sns.pairplot(wineWhite) """
+#Visualizing the distribution of variables with histograms
+""" def draw_histograms(df, variables, n_rows, n_cols):
+    fig=plt.figure()
+    for i, var_name in enumerate(variables):
+        ax=fig.add_subplot(n_rows,n_cols,i+1)
+        df[var_name].hist(ax=ax)
+        ax.set_title(var_name)
+    fig.tight_layout()
+    fig.suptitle('White Wine Feature Distributions')
+    plt.show()
+
+draw_histograms(wineWhite, wineWhite.columns, 3, 4) """
 
 #Printing correlation matrix for white wine
 """ corrMatrix = wineWhite.corr()
@@ -87,7 +95,7 @@ y = wineWhiteB['quality']
 Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7)
 
 #Logistic Regression summary - Classification
-logit = linear_model.LogisticRegression()
+""" logit = linear_model.LogisticRegression()
 logit.fit(Xtrain, ytrain)
 importance = logit.coef_[0]
 ypred = logit.predict(Xtest)
@@ -97,7 +105,7 @@ for i, v in enumerate(importance):
 	print('%s, Coeff: %.5f' % (X.columns.tolist()[i], v))
 plt.bar([x for x in range(len(importance))], abs(importance), tick_label=X.columns.tolist())
 plt.xticks(rotation=45, ha='right')
-plt.title('White Wine Logistic Regression Feature Importances')
+plt.title('White Wine Logistic Regression Feature Importances') """
 
 #QDA - Classification
 """ qda = discriminant_analysis.QuadraticDiscriminantAnalysis()

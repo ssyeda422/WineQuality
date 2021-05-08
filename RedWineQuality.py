@@ -85,14 +85,18 @@ X = wineRedB.drop('quality', axis=1)
 y = wineRedB['quality']
 Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.25, random_state=7)
 
-#Logistic Regression summary - Classification, using statsmodels
-""" Xb = sm.add_constant(Xtrain)
-Xtest = sm.add_constant(Xtest)
-logit = sm.Logit(ytrain, Xb).fit()
-print(logit.summary())
+#Logistic Regression summary - Classification
+""" logit = linear_model.LogisticRegression()
+logit.fit(Xtrain, ytrain)
+importance = logit.coef_[0]
 ypred = logit.predict(Xtest)
 mse = metrics.mean_squared_error(ytest, ypred)
-print("Logistic Regression MSE: ", mse) """
+print("Logistic Regression MSE: ", mse)
+for i, v in enumerate(importance):
+	print('%s, Coeff: %.5f' % (X.columns.tolist()[i], v))
+plt.bar([x for x in range(len(importance))], abs(importance), tick_label=X.columns.tolist())
+plt.xticks(rotation=45, ha='right')
+plt.title('Red Wine Logistic Regression Feature Importances') """
 
 #QDA - Classification
 """qda = discriminant_analysis.QuadraticDiscriminantAnalysis()
